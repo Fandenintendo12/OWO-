@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Bot OWO</title>
+</head>
+<body>
+
+  <h1>¡Bienvenido a Feedback Bot OWO!</h1>
+  <p>Déjanos tu feedback:</p>
+
+  <form id="feedbackForm">
+    <textarea id="feedbackMessage" placeholder="Escribe tu feedback aquí..." required></textarea>
+    <br>
+    <button type="submit">Enviar Feedback</button>
+  </form>
+
+  <script>
+    document.getElementById('feedbackForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const feedbackMessage = document.getElementById('feedbackMessage').value;
+
+      // Simulación de solicitud POST a un servidor ficticio en http://localhost:3000/api/feedback
+      fetch('http://localhost:3000/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: feedbackMessage }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Feedback enviado:', data);
+        alert('¡Gracias por tu feedback!');
+      })
+      .catch(error => {
+        console.error('Error al enviar feedback:', error);
+        alert('Hubo un error al enviar el feedback. Inténtalo de nuevo más tarde.');
+      });
+    });
+  </script>
+
+</body>
+</html>
